@@ -1,0 +1,408 @@
+position 是用來定位元素位置的屬性，一旦定位後就不會隨著網頁縮放而改變位置，僅適合將元素「固定」在你想放的地方。
+
+- 此屬性有兩個設定的屬性。
+    - 依據 static，relative，absolute，fixed，sticky 設定 定位的方式。
+    - 依據屬性  top，right，bottom，left 設定元素在文件中 偏移多少位置。
+- static (靜止定位)
+    - 元素靜止在原本的位置，不做任何偏移。
+    - 假設在 容器<div>元素中有三個子元素，position設定黃色 box的位置。
+        
+        `position: static;` 
+        
+        ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/9f11cc6b-1585-41da-add9-9fbc118517e2/43ed1ccd-f3d6-42a6-9405-38361feebaa2/Untitled.png)
+        
+- relative (相對定位)
+    - 元素相對原本的位置，進行 top，right，bottom，left偏移。
+        
+        `position: relative;
+        top: 40px; left: 40px;` 
+        
+        ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/9f11cc6b-1585-41da-add9-9fbc118517e2/3e407086-e0ac-4514-b388-d1c0e464e9cc/Untitled.png)
+        
+- absolute (絕對定位)
+    - 絕對定位的元素會根據離他最近的先代元素的 相對位置定位，進行偏移。
+    - 絕對定位 的元素會從元素的流(flow)中移除，因此其他元素定位時會當他不存在。
+        
+        
+        `position: absolute;
+        top: 40px; left: 40px;` 
+        
+        ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/9f11cc6b-1585-41da-add9-9fbc118517e2/0a28127d-27d0-4eae-a0cb-a026aaf439a2/Untitled.png)
+        
+        `position: absolute;
+        top: 0px; left: 0px;` 
+        
+        ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/9f11cc6b-1585-41da-add9-9fbc118517e2/89f755c2-fa14-4aaa-991f-06449937e8b4/Untitled.png)
+        
+- fixed (固定定位)
+    - 元素從文件邊框的位置，進行偏移，並且固定在該位置。滑鼠滾輪移動也一直留在該位置。
+        
+        `position: fixed;
+        top: 20px;` 
+        
+        ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/9f11cc6b-1585-41da-add9-9fbc118517e2/688dd00c-0292-4e6d-ab3b-db0fb03747a6/Untitled.png)
+        
+        ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/9f11cc6b-1585-41da-add9-9fbc118517e2/b2006ab6-6b7a-44d4-a560-1aaa2a327ab4/Untitled.png)
+        
+- sticky (黏性定位)
+    - 一開始元素出現在原本的位置，一旦滑鼠滾輪移動到 偏移位置，元素會一直留在該位置。
+        
+        `position: sticky;
+        top: 20px;`
+        
+    
+    ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/9f11cc6b-1585-41da-add9-9fbc118517e2/ceaa3b7e-d637-4047-ab14-09f352a8f78f/Untitled.png)
+    
+    ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/9f11cc6b-1585-41da-add9-9fbc118517e2/dfa647c7-13ba-4100-a342-edeebb39de9b/Untitled.png)
+    
+
+## Examples
+
+- Level-1 的 example16。
+    - ([Level-1](https://www.notion.so/Level-1-6b4d4e24069948599032da54d6eb0803?pvs=21) )
+
+- Relative positioning (相對定位)
+    - prog
+        
+        HTML
+        
+        ```html
+        <div class="box" id="one">One</div>
+        <div class="box" id="two">Two</div>
+        <div class="box" id="three">Three</div>
+        <div class="box" id="four">Four</div>
+        ```
+        
+        CSS
+        
+        ```css
+        * {
+          box-sizing: border-box;
+        }
+        
+        .box {
+          display: inline-block;
+          width: 100px;
+          height: 100px;
+          background: red;
+          color: white;
+        }
+        
+        #two {
+          position: relative;
+          top: 20px;
+          left: 20px;
+          background: blue;
+        }
+        ```
+        
+        Result
+        
+        ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/9f11cc6b-1585-41da-add9-9fbc118517e2/20c4c1c9-b75c-484b-945e-ffc4579c2994/Untitled.png)
+        
+- Absolute position (絕對定位)
+    
+    絕對定位 的元素會從元素的流(flow)中移除，因此其他元素定位時會當他不存在。
+    
+    - 絕對定位的元素會根據離他最近的先代元素(父元素) 的 相對位置定位。
+    - 若先代元素不存在，則根據文件的根元素的block 的相對位置定位。
+        - flow : 例如 css選取四個 class=box的<div>元素，這四個元素稱為 flow(元素流)。
+        元素流中的元素樣式會有相關。
+    - prog
+        
+        HTML
+        
+        ```html
+        <h1>Absolute positioning</h1>
+        <p>
+          I am a basic block level element. My adjacent block level elements sit on new
+          lines below me.
+        </p>
+        <p class="positioned">
+          By default we span 100% of the width of our parent element, and we are as tall
+          as our child content. Our total width and height is our content + padding +
+          border width/height.
+        </p>
+        <p>
+          We are separated by our margins. Because of margin collapsing, we are
+          separated by the width of one of our margins, not both.
+        </p>
+        <p>
+          inline elements <span>like this one</span> and <span>this one</span> sit on
+          the same line as one another, and adjacent text nodes, if there is space on
+          the same line. Overflowing inline elements
+          <span>wrap onto a new line if possible — like this one containing text</span>,
+          or just go on to a new line if not, much like this image will do:
+          <img src="long.jpg" /></p>
+        ```
+        
+        CSS
+        
+        ```css
+        * {
+          box-sizing: border-box;
+        }
+        
+        body {
+          width: 500px;
+          margin: 0 auto;
+        }
+        
+        p {
+          background: aqua;
+          border: 3px solid blue;
+          padding: 10px;
+          margin: 10px;
+        }
+        
+        span {
+          background: red;
+          border: 1px solid black;
+        }
+        
+        .positioned {
+          position: absolute;
+          background: yellow;
+          top: 30px;
+          left: 30px;
+        }
+        
+        ```
+        
+        Result
+        
+        ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/9f11cc6b-1585-41da-add9-9fbc118517e2/dc4fcff8-3b7b-459c-9f1e-f5136d7392e8/Untitled.png)
+        
+    - 範例中 CSS選擇器有設定 P 的 margin(邊距) 是10，.position中設定偏移top=30 left=30，
+    所以 .position 實際位置(從左上(0,0)算) 是 (40px,40px)。
+    - 其他 P 元素 邊距10，內距10，是同一個 flow。
+    - box-sizing: border-box 在這裡沒有實際作用。
+    - body 是顯示html元素的地方，這裡寬度設500px，設定 margin=auto 會讓所有 html元素 border處於中間的位置(250px)，0可以省略。
+    - 若未進行任何 CSS樣式調整，原本 h1  P 元素排列長這樣。
+        - img
+            
+            ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/9f11cc6b-1585-41da-add9-9fbc118517e2/aa62fe1b-1447-4f99-b8fe-940e7f97b3a0/Untitled.png)
+            
+- Fixed positioning ( 固定定位)
+    
+    定位 fixed 和 absolute 很像。
+    
+    - 一開始 視窗(viewport) 會建立一個額外的(exception) 區塊容器(containing block)。
+        - 若先代有transform, perspective, filter 的屬性，會取代元素成為區塊容器。
+    - 這會建立一個無論如何捲動都停留在原地的元素。
+    - prog
+        
+        HTML
+        
+        ```html
+        <div class="outer">
+        	<p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam congue tortor
+            eget pulvinar lobortis. Vestibulum ante ipsum primis in faucibus orci luctus
+            et ultrices posuere cubilia Curae; Nam ac dolor augue. Pellentesque mi mi,
+            laoreet et dolor sit amet, ultrices varius risus. Nam vitae iaculis elit.
+            Aliquam mollis interdum libero. Sed sodales placerat egestas. Vestibulum ut
+            arcu aliquam purus viverra dictum vel sit amet mi. Duis nisl mauris, aliquam
+            sit amet luctus eget, dapibus in enim. Sed velit augue, pretium a sem
+            aliquam, congue porttitor tortor. Sed tempor nisl a lorem consequat, id
+            maximus erat aliquet. Sed sagittis porta libero sed condimentum. Aliquam
+            finibus lectus nec ante congue rutrum. Curabitur quam quam, accumsan id
+            ultrices ultrices, tempor et tellus.
+          </p>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam congue tortor
+            eget pulvinar lobortis. Vestibulum ante ipsum primis in faucibus orci luctus
+            et ultrices posuere cubilia Curae; Nam ac dolor augue. Pellentesque mi mi,
+            laoreet et dolor sit amet, ultrices varius risus. Nam vitae iaculis elit.
+            Aliquam mollis interdum libero. Sed sodales placerat egestas. Vestibulum ut
+            arcu aliquam purus viverra dictum vel sit amet mi. Duis nisl mauris, aliquam
+            sit amet luctus eget, dapibus in enim. Sed velit augue, pretium a sem
+            aliquam, congue porttitor tortor. Sed tempor nisl a lorem consequat, id
+            maximus erat aliquet. Sed sagittis porta libero sed condimentum. Aliquam
+            finibus lectus nec ante congue rutrum. Curabitur quam quam, accumsan id
+            ultrices ultrices, tempor et tellus.
+          </p>
+          <div class="box" id="one">One</div>
+         </div>
+        ```
+        
+        CSS
+        
+        ```css
+        * {
+          box-sizing: border-box;
+        }
+        
+        .box {
+          width: 100px;
+          height: 100px;
+          background: red;
+          color: white;
+        }
+        
+        #one {
+          position: fixed;
+          top: 80px;
+          left: 10px;
+          background: blue;
+        }
+        
+        .outer {
+          width: 500px;
+          height: 300px;
+          overflow: scroll;
+          padding-left: 150px;
+        }
+        ```
+        
+        ### Result
+        
+        ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/9f11cc6b-1585-41da-add9-9fbc118517e2/7d6035e2-a85c-4a19-9417-293916747765/Untitled.png)
+        
+    - CSS 選擇器選取所有元素，造箱子。
+        
+         `* { box-sizing: border-box; }`
+        
+        - 所有設定 寬與高 的元素都建立一個 border 是 寬與高的箱子。
+        - 這裡造2個箱子，一個藍色箱子，一個含 段落文字 的 捲軸箱子。
+    - <div class=outer>包括 P元素與 <div class=box id=one> 的藍色箱子。
+    - 藍色箱子起點在文件左上角 (0,0)，對(左,上)偏移(10,80)，所以定位在(10,80)。
+    - <div class=outer> 被設成一個 寬高 是 (500,300) 的 箱子。
+        - 子代 P元素都被放在這個箱子中，箱子有 scroller可以滾動。
+        - padding-left 屬性會將元素的後代視為 content，進行內距偏移。
+        - 箱子起點在文件左上 (0,0)，寬度500px，padding-left: 150px; 
+        會讓箱子的 content P元素 左內距偏移150後顯示。
+        - 因為 P 元素 margin=0(未設定)。所以偏移後實際 寬高 是 (350,300)。
+    - CSS 的階層
+        - ([CSS 的階層 ](https://www.notion.so/CSS-542d88f01c844462b26740ea93aa1ebd?pvs=21) )
+- Sticky positioning (黏性定位)
+    
+    定位 Sticky 可以視為 elative 和 fixed 的結合。
+    
+    - 最接近，設有 scrolling 屬性的先代 是他的 視窗(viewport)。
+    - 黏性定位的元素在到達某個特定的臨界點之前會當成 relative，隨卷軸移動
+    到達臨界點之後會被當成 fixed 固定在設定的位置。
+    - prog
+        
+        ### HTML
+        
+        ```html
+        <dl>
+          <div>
+            <dt>A</dt>
+            <dd>Andrew W.K.</dd>
+            <dd>Apparat</dd>
+            <dd>Arcade Fire</dd>
+            <dd>At The Drive-In</dd>
+            <dd>Aziz Ansari</dd>
+          </div>
+          <div>
+            <dt>C</dt>
+            <dd>Chromeo</dd>
+            <dd>Common</dd>
+            <dd>Converge</dd>
+            <dd>Crystal Castles</dd>
+            <dd>Cursive</dd>
+          </div>
+          <div>
+            <dt>E</dt>
+            <dd>Explosions In The Sky</dd>
+          </div>
+          <div>
+            <dt>T</dt>
+            <dd>Ted Leo &amp; The Pharmacists</dd>
+            <dd>T-Pain</dd>
+            <dd>Thrice</dd>
+            <dd>TV On The Radio</dd>
+            <dd>Two Gallants</dd>
+          </div>
+        </dl>
+        
+        ```
+        
+        ### CSS
+        
+        ```css
+        * {
+          box-sizing: border-box;
+        }
+        
+        dl > div {
+          background: #fff;
+          padding: 24px 0 0 0;
+        }
+        
+        dt {
+          background: #b8c1c8;
+          border-bottom: 1px solid #989ea4;
+          border-top: 1px solid #717d85;
+          color: #fff;
+          font:
+            bold 18px/21px Helvetica,
+            Arial,
+            sans-serif;
+          margin: 0;
+          padding: 2px 0 0 12px;
+          position: -webkit-sticky;
+          position: sticky;
+          top: -1px;
+        }
+        
+        dd {
+          font:
+            bold 20px/45px Helvetica,
+            Arial,
+            sans-serif;
+          margin: 0;
+          padding: 0 0 0 12px;
+          white-space: nowrap;
+        }
+        
+        dd + dd {
+          border-top: 1px solid #ccc;
+        }
+        
+        ```
+        
+        ### Result
+        
+        ![簡報1.gif](https://prod-files-secure.s3.us-west-2.amazonaws.com/9f11cc6b-1585-41da-add9-9fbc118517e2/a5392cc9-d6b5-47ab-889c-72588b194e15/%E7%B0%A1%E5%A0%B11.gif)
+        
+    - ([元素 <dl> <dt> <dd>](https://www.notion.so/dl-dt-dd-4dbb2be07ad24c07b0aa8038cd2bb3b6?pvs=21))
+    - <dl> 的 直接子元素 <div>
+        
+        `dl > div { //style }` 
+        
+        - 內距 (padding) : 上右下左，24px 0 0 0。所以 顯示內容 A,C,E.T的<dt> 
+        都從 <div> border 上邊 偏移24px 才顯示。
+        - 這裡使用 <div> 當作容器，裝入 4 個 <dt>，相當於把 <div>當成邊框來使用。
+        - 顏色設定
+            - div 背景(background)，dt 內容
+                
+                ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/9f11cc6b-1585-41da-add9-9fbc118517e2/e42530bf-a389-40fd-9712-eabf56af11d6/Untitled.png)
+                
+            - 背景 (background) :
+                
+                ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/9f11cc6b-1585-41da-add9-9fbc118517e2/8472e280-04d9-43d0-ac53-ef8b036b939b/Untitled.png)
+                
+            - 下上邊框(border-top,border-bottom)
+                
+                ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/9f11cc6b-1585-41da-add9-9fbc118517e2/fd8f92b8-18a7-4130-895c-b5568fad386d/Untitled.png)
+                
+                ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/9f11cc6b-1585-41da-add9-9fbc118517e2/efe3e99b-8ee0-4040-ae5c-d3aa61f66549/Untitled.png)
+                
+            - dd+dd
+                
+                ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/9f11cc6b-1585-41da-add9-9fbc118517e2/34183f15-b49d-4b20-b397-3b40f77031dc/Untitled.png)
+                
+    - font (字型設定) : ([**font**](https://www.notion.so/font-61169e19d3ec4012b0478102e9dcf5b9?pvs=21) )
+    - white-space: nowrap; ([white-space](https://www.notion.so/white-space-fbd38646a9e2424e996357acce3fc1cc?pvs=21) )
+    - <dt> 設定 背景，下上邊框，內容顏色(color,文字顏色)，自型(font)，內外距，定位。
+        - 下上邊框(border-top,border-bottom) : 1px 實線。
+        - 邊距(margin) : 0，所以 dt 與 dd 邊框沒有間隙。
+        - opsition : sticky; 且 top : -1; ，所以卷軸一滾動 <dt>馬上就會黏在視窗最上方。
+    - <dd> 設定 font，margin，padding，white-space。
+        - margin : 0; 使 dd與dt，dd與dd 間都沒有間隙。
+        - padding: 0 0 0 12px; 左內距 是 12px。
+    - dd+dd {//style}
+        -
