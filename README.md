@@ -21,7 +21,7 @@ github是一個基於 git進行源代碼託管服務 與 版本控制 的網站�
 以搜尋 react的倉庫，Facebook/react 為例。
 
 - img
-    ![image](picture or gif url)
+    ![image]([picture or gif url](https://github.com/Yishine31/text123/blob/main/Untitled.png))
     ![image](https://prod-files-secure.s3.us-west-2.amazonaws.com/9f11cc6b-1585-41da-add9-9fbc118517e2/98d41768-70ce-475d-a569-d3156a65a13d/Untitled.png)
     
 - 搜尋清單 第一行是標題，包括上傳者 `/` 後是庫的名稱，接著是 簡介, 相關標籤(topic)。
